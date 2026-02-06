@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bashundhara Smart Delivery - বসুন্ধরা এলাকায় দ্রুত ও নির্ভরযোগ্য ডেলিভারি সার্ভিস</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Contact Options */
+        .contact-options {
+            background: white;
+            padding: 2rem 20px;
+            text-align: center;
+            box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-options h2 {
+            color: #667eea;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 1024px) {
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .contact-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideDown 0.3s ease;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+            transition: all 0.3s;
+        }
+
+        .close:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Service Buttons */
+        .service-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.2rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-milk {
+            background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+            color: white;
+        }
+
+        .btn-milk:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-laundry {
+            background: linear-gradient(135deg, #4ECDC4, #44A08D);
+            color: white;
+        }
+
+        .btn-laundry:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(78, 205, 196, 0.4);
+        }
+
+        .service-note {
+            text-align: center;
+            color: white;
+            opacity: 0.9;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section */
+        section {
+            padding: 4rem 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #667eea;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Service Area */
+        .service-area {
+            background: white;
+            text-align: center;
+        }
+
+        .service-area-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-details {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .contact-item a:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem 20px;
+        }
+
+        .footer-motto {
+            margin-top: 0.5rem;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .service-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo">Bashundhara Smart Delivery</div>
+            <div class="tagline">বসুন্ধরা এলাকায় দ্রুত ও নির্ভরযোগ্য ডেলিভারি সার্ভিস</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>বসুন্ধরা স্মার্ট ডেলিভারি</h1>
+            <p>আপনার যেকোনো প্রয়োজনীয় জিনিস অর্ডার করুন, আমরা খুব অল্প সময়ের মধ্যেই পৌঁছে দেব।</p>
+            
+            <div class="service-note" style="margin-top: 2rem;">
+                ⬇️ নিচে আপনার প্রয়োজনীয় সার্ভিস বেছে নিন
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Options -->
+    <section class="contact-options">
+        <h2>📞 আমাদের সার্ভিস সমূহ</h2>
+        <div class="contact-grid">
+            <a href="#" class="contact-card" onclick="openModal('milk'); return false;">
+                <div class="icon">🥛</div>
+                <h3>দুধ অর্ডার</h3>
+                <p>তাজা দুধের জন্য এখানে ক্লিক করুন</p>
+            </a>
+            
+            <a href="#" class="contact-card" onclick="openModal('laundry'); return false;">
+                <div class="icon">🧺</div>
+                <h3>Laundry & Ironing</h3>
+                <p>কাপড় পরিষ্কার ও ইস্ত্রির জন্য</p>
+            </a>
+            
+            <a href="#" class="contact-card" onclick="openModal('food'); return false;">
+                <div class="icon">🍽️</div>
+                <h3>Food অর্ডার</h3>
+                <p>খাবার অর্ডার করতে ক্লিক করুন</p>
+            </a>
+            
+            <a href="#" class="contact-card" onclick="openModal('other'); return false;">
+                <div class="icon">📦</div>
+                <h3>যেকোনো কিছু</h3>
+                <p>অন্যান্য সার্ভিসের জন্য</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Modals for each service -->
+    <!-- Milk Order Modal -->
+    <div id="milkModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('milk')">&times;</span>
+                <h2>🥛 দুধ অর্ডার করুন</h2>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="submitOrder(event, 'milk')">
+                    <div class="form-group">
+                        <label>1️⃣ আপনার নাম লিখুন *</label>
+                        <input type="text" name="name" required placeholder="নাম লিখুন">
+                    </div>
+                    <div class="form-group">
+                        <label>2️⃣ মোবাইল নাম্বার দিন *</label>
+                        <input type="tel" name="phone" required placeholder="01XXXXXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>3️⃣ বাসার ঠিকানা লিখুন (বসুন্ধরা) *</label>
+                        <textarea name="address" required placeholder="ব্লক, রোড, বাসা নাম্বার"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>4️⃣ কত লিটার দুধ লাগবে লিখুন *</label>
+                        <input type="text" name="quantity" required placeholder="যেমন: ১ লিটার / ২ লিটার">
+                    </div>
+                    <button type="submit" class="submit-btn">5️⃣ সাবমিট করুন</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Laundry Order Modal -->
+    <div id="laundryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('laundry')">&times;</span>
+                <h2>🧺 Laundry & Ironing অর্ডার করুন</h2>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="submitOrder(event, 'laundry')">
+                    <div class="form-group">
+                        <label>1️⃣ আপনার নাম লিখুন *</label>
+                        <input type="text" name="name" required placeholder="নাম লিখুন">
+                    </div>
+                    <div class="form-group">
+                        <label>2️⃣ মোবাইল নাম্বার দিন *</label>
+                        <input type="tel" name="phone" required placeholder="01XXXXXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>3️⃣ বাসার ঠিকানা লিখুন (বসুন্ধরা) *</label>
+                        <textarea name="address" required placeholder="ব্লক, রোড, বাসা নাম্বার"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>4️⃣ কত পিস কাপড় লাগবে লিখুন *</label>
+                        <input type="text" name="quantity" required placeholder="যেমন: ১০ পিস / ২০ পিস">
+                    </div>
+                    <button type="submit" class="submit-btn">5️⃣ সাবমিট করুন</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Food Order Modal -->
+    <div id="foodModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('food')">&times;</span>
+                <h2>🍽️ Food অর্ডার করুন</h2>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="submitOrder(event, 'food')">
+                    <div class="form-group">
+                        <label>1️⃣ আপনার নাম লিখুন *</label>
+                        <input type="text" name="name" required placeholder="নাম লিখুন">
+                    </div>
+                    <div class="form-group">
+                        <label>2️⃣ মোবাইল নাম্বার দিন *</label>
+                        <input type="tel" name="phone" required placeholder="01XXXXXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>3️⃣ বাসার ঠিকানা লিখুন (বসুন্ধরা) *</label>
+                        <textarea name="address" required placeholder="ব্লক, রোড, বাসা নাম্বার"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>4️⃣ কি কি খাবার লাগবে লিখুন *</label>
+                        <textarea name="quantity" required placeholder="খাবারের নাম ও পরিমাণ লিখুন"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">5️⃣ সাবমিট করুন</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Other Service Modal -->
+    <div id="otherModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('other')">&times;</span>
+                <h2>📦 যেকোনো কিছু অর্ডার করুন</h2>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="submitOrder(event, 'other')">
+                    <div class="form-group">
+                        <label>1️⃣ আপনার নাম লিখুন *</label>
+                        <input type="text" name="name" required placeholder="নাম লিখুন">
+                    </div>
+                    <div class="form-group">
+                        <label>2️⃣ মোবাইল নাম্বার দিন *</label>
+                        <input type="tel" name="phone" required placeholder="01XXXXXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>3️⃣ বাসার ঠিকানা লিখুন (বসুন্ধরা) *</label>
+                        <textarea name="address" required placeholder="ব্লক, রোড, বাসা নাম্বার"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>4️⃣ কি লাগবে বিস্তারিত লিখুন *</label>
+                        <textarea name="quantity" required placeholder="আপনার প্রয়োজনীয় জিনিসের বিবরণ"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">5️⃣ সাবমিট করুন</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(type) {
+            document.getElementById(type + 'Modal').style.display = 'block';
+        }
+
+        function closeModal(type) {
+            document.getElementById(type + 'Modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        function submitOrder(event, type) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const name = form.name.value;
+            const phone = form.phone.value;
+            const address = form.address.value;
+            const quantity = form.quantity.value;
+            
+            let serviceType = '';
+            if (type === 'milk') serviceType = 'দুধ অর্ডার';
+            else if (type === 'laundry') serviceType = 'Laundry & Ironing';
+            else if (type === 'food') serviceType = 'Food অর্ডার';
+            else serviceType = 'যেকোনো কিছু';
+            
+            // Facebook Messenger only
+            const fbMessage = `নতুন অর্ডার - ${serviceType}\n\nনাম: ${name}\nমোবাইল: ${phone}\nঠিকানা: ${address}\nঅর্ডার: ${quantity}`;
+            const fbUrl = `https://m.me/61571573970398?text=${encodeURIComponent(fbMessage)}`;
+            window.open(fbUrl, '_blank');
+            
+            closeModal(type);
+            form.reset();
+        }
+    </script>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title">আমাদের সম্পর্কে</h2>
+            <div class="about-content">
+                <p>আমরা <strong>Bashundhara Smart Delivery</strong> — বসুন্ধরা আবাসিক এলাকার ভেতরে যেকোনো ধরনের সহায়তা ও ডেলিভারি সার্ভিস দিয়ে থাকি।</p>
+                <p>দুধ, খাবার, লন্ড্রি, আয়রনিং কিংবা দৈনন্দিন প্রয়োজনীয় যেকোনো জিনিস আপনি অর্ডার করতে পারবেন আমাদের মাধ্যমে।</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section style="background: #f5f5f5;">
+        <div class="container">
+            <h2 class="section-title">আমাদের সার্ভিস</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🥛</div>
+                    <h3>দুধ ডেলিভারি</h3>
+                    <p>প্রতিদিন তাজা দুধ আপনার দরজায়</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧺</div>
+                    <h3>Laundry & Ironing</h3>
+                    <p>কাপড় পরিষ্কার ও ইস্ত্রি সার্ভিস</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🍽️</div>
+                    <h3>Food ডেলিভারি</h3>
+                    <p>খাবার অর্ডার ও ডেলিভারি</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>যেকোনো কিছু</h3>
+                    <p>আপনার সব ধরনের প্রয়োজন</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section style="background: white;">
+        <div class="container">
+            <h2 class="section-title">কেন আমাদের বেছে নেবেন</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>দ্রুত ডেলিভারি</h3>
+                    <p>অল্প সময়ে আপনার কাছে পৌঁছে যাই</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>লোকাল সার্ভিস</h3>
+                    <p>শুধুমাত্র বসুন্ধরা এরিয়ার ভেতরে</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>সাশ্রয়ী মূল্য</h3>
+                    <p>ন্যায্য ও যুক্তিসংগত দাম</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>বিশ্বাসযোগ্য</h3>
+                    <p>দায়িত্বশীল ও নির্ভরযোগ্য সার্ভিস</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Area -->
+    <section class="service-area">
+        <div class="container">
+            <h2 class="section-title">সার্ভিস এলাকা</h2>
+            <div class="service-area-content">
+                <p>📍 আমাদের সার্ভিস শুধুমাত্র <strong>বসুন্ধরা আবাসিক এলাকার</strong> ভেতরে প্রযোজ্য।</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-info">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">যোগাযোগ করুন</h2>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <strong>📧 ইমেইল:</strong>
+                    <a href="mailto:bashundharasmartdelivery@gmail.com">bashundharasmartdelivery@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <strong>📞 ফোন নম্বর:</strong>
+                    <p>
+                        <a href="tel:01858508254">01858-508254</a><br>
+                        <a href="tel:01775776473">01775-776473</a><br>
+                        <a href="tel:01779493058">01779-493058</a>
+                    </p>
+                </div>
+                <div class="contact-item">
+                    <p style="margin-top: 1.5rem; font-size: 1.1rem;">
+                        অর্ডার করতে উপরের বাটনে ক্লিক করুন অথবা আমাদের সাথে সরাসরি যোগাযোগ করুন
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&co
