@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bashundhara Smart Delivery - বসুন্ধরা এলাকায় দ্রুত ও নির্ভরযোগ্য ডেলিভারি সার্ভিস</title>
-    <link rel="icon" href="https://i.pinimg.com/736x/49/18/5d/49185ddfe641b7d67b3b53404add567f.jpg">
     <style>
         * {
             margin: 0;
@@ -17,6 +16,65 @@
             line-height: 1.6;
             color: #333;
             background: #f5f5f5;
+        }
+
+        /* Ramadan Banner */
+        .ramadan-banner {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            animation: slideInFromTop 0.8s ease, pulse 2s infinite;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ramadan-banner::before {
+            content: '🌙';
+            position: absolute;
+            left: 10%;
+            font-size: 2rem;
+            animation: rotate 3s linear infinite;
+        }
+
+        .ramadan-banner::after {
+            content: '🌙';
+            position: absolute;
+            right: 10%;
+            font-size: 2rem;
+            animation: rotate 3s linear infinite reverse;
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Header */
@@ -108,28 +166,93 @@
             border-radius: 15px;
             color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .contact-card:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
         }
 
         .contact-card .icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         .contact-card h3 {
             font-size: 1.2rem;
             margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
         }
 
         .contact-card p {
             font-size: 0.9rem;
             opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Stagger animation for cards */
+        .contact-card:nth-child(1) {
+            animation: slideInLeft 0.6s ease 0.1s backwards;
+        }
+
+        .contact-card:nth-child(2) {
+            animation: slideInLeft 0.6s ease 0.3s backwards;
+        }
+
+        .contact-card:nth-child(3) {
+            animation: slideInLeft 0.6s ease 0.5s backwards;
+        }
+
+        .contact-card:nth-child(4) {
+            animation: slideInLeft 0.6s ease 0.7s backwards;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
         /* Modal Styles */
@@ -359,17 +482,23 @@
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: fadeInUp 0.6s ease;
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
         }
 
         .service-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.3) rotate(10deg);
         }
 
         .service-card h3 {
@@ -393,11 +522,28 @@
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
         }
 
         .feature-card h3 {
@@ -527,6 +673,11 @@
             <div class="tagline">বসুন্ধরা এলাকায় দ্রুত ও নির্ভরযোগ্য ডেলিভারি সার্ভিস</div>
         </div>
     </header>
+
+    <!-- Ramadan Special Banner -->
+    <div class="ramadan-banner">
+        ⭐ রমজান স্পেশাল অফার - দুধ মাত্র ১০০ টাকা! ⭐
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -728,7 +879,7 @@
             
             // Facebook Messenger only
             const fbMessage = `নতুন অর্ডার - ${serviceType}\n\nনাম: ${name}\nমোবাইল: ${phone}\nঠিকানা: ${address}\nঅর্ডার: ${quantity}`;
-            const fbUrl = `https://m.me/61571573970398?text=${encodeURIComponent(fbMessage)}`;
+            const fbUrl = `https://m.me/bashundharasmartdelivery?text=${encodeURIComponent(fbMessage)}`;
             window.open(fbUrl, '_blank');
             
             closeModal(type);
@@ -822,7 +973,7 @@
             <div class="contact-details">
                 <div class="contact-item">
                     <strong>📧 ইমেইল:</strong>
-                    <a href="mailto:bashundharasmartdelivery@gmail.com">bashundharasmartdelivery@gmail.com</a>
+                    <a href="/cdn-cgi/l/email-protection#573536243f2239333f362536243a36252333323b3e2132252e17303a363e3b7934383a"><span class="__cf_email__" data-cfemail="4022213328352e2428213221332d21323424252c293625323900272d21292c6e232f2d">[email&#160;protected]</span></a>
                 </div>
                 <div class="contact-item">
                     <strong>📞 ফোন নম্বর:</strong>
@@ -834,13 +985,4 @@
                 </div>
                 <div class="contact-item">
                     <p style="margin-top: 1.5rem; font-size: 1.1rem;">
-                        অর্ডার করতে উপরের বাটনে ক্লিক করুন অথবা আমাদের সাথে সরাসরি যোগাযোগ করুন
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&co
+                        অর্ডার করতে উপরের বাটনে ক্লিক করুন অথবা আমাদের সাথে সরাসরি যোগায
